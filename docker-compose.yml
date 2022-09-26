@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        depends_on: 
+            - database
+        environment: 
+            DATABASE_HOST: database
+            DATABASE_USER: root
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: spotcar
+            NODE_ENV: development
+            PORT: 3000
+        ports:
+            - "3000:3000"
+    database:
+        platform: linux/amd64
+        image: mysql:5.7
+        restart: always
+        ports:
+        - 3306:3306
+        env_file:
+        - .env
+        volumes:
+        - ~/database/spotcar:/var/lib/mysql
