@@ -51,7 +51,7 @@ Tabela de conteúdos
 ## ⚙️ Funcionalidades <a name="funcionalidades"></a>
 
 - [x] O seu sistema pode se integrar a SpotCar para:
-  - [x] Cadastrar estacionamentos.
+  - [x] Cadastrar estabelecimento.
   - [x] Relatórios com a visão do dono.
   - [x] Gerenciar veículos.
   - [x] Controle de entrada e saída de veículos.
