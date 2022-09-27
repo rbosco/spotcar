@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { response } from 'express';
 import * as moment from 'moment';
-import CompanyService from 'src/company/company.service';
-import VehicleService from 'src/vehicle/vehicle.service';
+import CompanyService from '../company/company.service';
+import VehicleService from '../vehicle/vehicle.service';
 import CreateParkDTO from './dto/create-park.dto';
 import { DeleteParkDTO } from './dto/delete-park.dto';
 import { UpdateParkDTO } from './dto/update-park.dto';
@@ -31,7 +32,7 @@ export class ParkService {
     }
 
     const vehicleInPark = await this.getVehicleInPark(vehicle.id);
-    if(vehicleInPark){
+    if(!vehicleInPark){
         throw new HttpException('Vehicle already did register in the park',HttpStatus.NOT_FOUND);
     }
     
@@ -56,7 +57,7 @@ export class ParkService {
     return park;
   }
 
-  async delete(parkData: DeleteParkDTO): Promise<void> {
+  async delete(parkData: DeleteParkDTO){
     const vehicle = await this.vehicleService.showByBoard(parkData.board);
     if(!vehicle){
         throw new HttpException('Vehicle not found',HttpStatus.NOT_FOUND);
@@ -66,6 +67,8 @@ export class ParkService {
     if(!park.affected){
         throw new HttpException('Vehicle did not found in the park', HttpStatus.NOT_FOUND);
     }
+
+    return response.status(HttpStatus.OK).json({'message':'Vehicle removed in the park with success'});
   }
 }
 

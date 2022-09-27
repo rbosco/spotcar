@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import User from './user.entity';
 import CreateUserDto from './dto/createUser.dto';
 import { UpdateUserDTO } from './dto/updateUser.dto';
+import { response } from 'express';
 
 @Injectable()
 export class UserService {
@@ -63,5 +64,7 @@ export class UserService {
     if(!user.affected){
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
+
+    return response.status(HttpStatus.OK).json({'message': 'User deleted with success!'})
   }
 }

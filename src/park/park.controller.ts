@@ -10,9 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { response } from 'express';
-import JwtAuthenticationGuard from 'src/auth/jwt-authentication.guard';
-import RequestWithUser from 'src/auth/requestWithUser.interface';
+import JwtAuthenticationGuard from '../auth/jwt-authentication.guard';
+import RequestWithUser from '../auth/requestWithUser.interface';
 import CreateParkDTO from './dto/create-park.dto';
 import { DeleteParkDTO } from './dto/delete-park.dto';
 import { UpdateParkDTO } from './dto/update-park.dto';
@@ -44,7 +43,6 @@ export class ParkController {
   @Delete()
   @ApiBody({type: DeleteParkDTO})
   async delete(@Body() deleteParkDTO: DeleteParkDTO, @Req() request: RequestWithUser, @Res() response) {
-    await this.parkService.delete(deleteParkDTO);
-    return response.status(HttpStatus.OK).json({'message':'Vehicle removed in the park with success'});
+    return this.parkService.delete(deleteParkDTO);
   }
 }

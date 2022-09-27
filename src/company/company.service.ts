@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { response } from 'express';
 import Company from './company.entity';
 import { CompanyRepository } from './company.repository';
 import { CreateCompanyDTO } from './dto/create-company.dto';
@@ -46,6 +47,10 @@ export class CompanyService {
     if (!company.affected) {
       throw new HttpException('Company not found', HttpStatus.NOT_FOUND);
     }
+
+    return response
+      .status(HttpStatus.OK)
+      .json({ message: 'Company deleted with success!' });
   }
 
   async getCountInOutPark(): Promise<any[]>{

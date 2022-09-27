@@ -14,7 +14,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import JwtAuthenticationGuard from 'src/auth/jwt-authentication.guard';
+import JwtAuthenticationGuard from '../auth/jwt-authentication.guard';
 import RequestWithUser from '../auth/requestWithUser.interface';
 import CompanyService from './company.service';
 import { CreateCompanyDTO } from './dto/create-company.dto';
@@ -35,21 +35,21 @@ export class CompanyController {
 
   @HttpCode(200)
   @UseGuards(JwtAuthenticationGuard)
-  @Get('qt_in_out_all_company')
+  @Get('count_in_out_all_company')
   async getCountInOutPark(@Req() request: RequestWithUser){
     return this.companyService.getCountInOutPark();
   }
   
   @HttpCode(200)
   @UseGuards(JwtAuthenticationGuard)
-  @Get('qt_in_out_per_hour_all')
+  @Get('count_in_out_per_hour_all')
   async getCountInOutParkPerHour(@Req() request: RequestWithUser){
     return this.companyService.getCountInOutParkPerHour();
   }
 
   @HttpCode(200)
   @UseGuards(JwtAuthenticationGuard)
-  @Get('report/qt_vehicle_park_in_per_period/:cnpj')
+  @Get('report/vehicle_park_in_per_period/:cnpj')
   async getCountVehicleParkInPerPeriodByCnpj(
     @Param('cnpj') cnpj: string,
     @Query() showQueryDTO: ShowQueryDTO,
@@ -75,7 +75,7 @@ export class CompanyController {
 
   @HttpCode(200)
   @UseGuards(JwtAuthenticationGuard)
-  @Get('qt_in_out/:cnpj')
+  @Get('count_in_out/:cnpj')
   async getCountInOutParkByCnpj(@Param('cnpj') cnpj: string, @Req() request: RequestWithUser){
     return this.companyService.getCountInOutParkByCnpj(cnpj);
   }
@@ -107,9 +107,6 @@ export class CompanyController {
     @Req() request: RequestWithUser,
     @Res() response,
   ) {
-    this.companyService.delete(+id);
-    return response
-      .status(HttpStatus.OK)
-      .json({ message: 'Company deleted with success!' });
+    return this.companyService.delete(+id);
   }
 }

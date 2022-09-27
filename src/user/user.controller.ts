@@ -14,8 +14,8 @@ import {
   } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { response } from 'express';
-import JwtAuthenticationGuard from 'src/auth/jwt-authentication.guard';
-import RequestWithUser from 'src/auth/requestWithUser.interface';
+import JwtAuthenticationGuard from '../auth/jwt-authentication.guard';
+import RequestWithUser from '../auth/requestWithUser.interface';
 import { UpdateUserDTO } from './dto/updateUser.dto';
 import { UserService } from './user.service';
 
@@ -50,7 +50,6 @@ export class UserController {
     @UseGuards(JwtAuthenticationGuard)
     @Delete(':email')
     async delete(@Param('email') email: string, @Res() response){
-        await this.userService.delete(email);
-        return response.status(HttpStatus.OK).json({'message': 'User deleted with success!'})
+        return await this.userService.delete(email);
     }
 }

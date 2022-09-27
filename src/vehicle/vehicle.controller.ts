@@ -13,8 +13,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import JwtAuthenticationGuard from 'src/auth/jwt-authentication.guard';
-import RequestWithUser from 'src/auth/requestWithUser.interface';
+import JwtAuthenticationGuard from '../auth/jwt-authentication.guard';
+import RequestWithUser from '../auth/requestWithUser.interface';
 import CreateVehicleDTO from './dto/create-vehicle.dto';
 import { UpdateVehicleDTO } from './dto/update-vehicle.dto';
 import VehicleService from './vehicle.service';
@@ -68,9 +68,6 @@ export class VehicleController {
     @Req() request: RequestWithUser,
     @Res() response,
   ) {
-    this.vehicleService.delete(board);
-    return response
-      .status(HttpStatus.OK)
-      .json({ message: 'Vehicle deleted with success' });
+    return this.vehicleService.delete(board);
   }
 }

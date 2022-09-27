@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { response } from 'express';
 import { Repository } from 'typeorm';
 import CreateVehicleDTO from './dto/create-vehicle.dto';
 import { UpdateVehicleDTO } from './dto/update-vehicle.dto';
@@ -46,6 +47,10 @@ export class VehicleService {
     if (!vehicle.affected) {
       throw new HttpException('Vehicle not found', HttpStatus.NOT_FOUND);
     }
+
+    return response
+      .status(HttpStatus.OK)
+      .json({ message: 'Vehicle deleted with success' });
   }
 }
 

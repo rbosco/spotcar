@@ -39,12 +39,12 @@ export class CompanyRepository extends Repository<Company>{
       .leftJoin("c.park","p")
       .where("p.created_at IS NOT NULL")
       .getRawMany()
-
+    console.log(countInPerHour);
     return countInPerHour;
   }
 
   async getCountOutParkPerHour(): Promise<any[]>{
-    const countInPerHour = await this.createQueryBuilder("c")
+    const countOutPerHour = await this.createQueryBuilder("c")
       .select("c.cnpj as cnpj")
       .distinct(true)
       .addSelect("HOUR(p.updated_at) as hora")
@@ -52,8 +52,8 @@ export class CompanyRepository extends Repository<Company>{
       .leftJoin("c.park","p")
       .where("p.updated_at IS NOT NULL")
       .getRawMany()
-
-    return countInPerHour;
+    console.log(countOutPerHour);
+    return countOutPerHour;
   }
 
   async getCountVehicleParkInPerPeriodByCnpj(cnpj: string,showQueryDTO:ShowQueryDTO): Promise<any>{

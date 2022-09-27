@@ -10,7 +10,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Spotcar APP')
+    .setTitle('SpotCar APP')
     .setDescription('SpotCar API documentation')
     .setVersion('1.0')
     .addTag('Authentication')
