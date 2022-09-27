@@ -120,7 +120,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 -   **[EditorConfig](https://editorconfig.org/)**
 
-#### **Server** ([Nodejs 14](https://nodejs.org/en/)) <a name="tecnologias-server"></a>
+#### **Server** ([Nodejs:14](https://nodejs.org/en/)) <a name="tecnologias-server"></a>
 
 -   **[NestJS](https://nestjs.com/)**
 -   **[TypeORM](https://typeorm.io/)**
