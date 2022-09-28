@@ -1,4 +1,4 @@
-FROM node:14-alpine AS development
+FROM node:14
 
 # Create app directory, this is in our container/in our image
 WORKDIR /usr/src/app
@@ -16,20 +16,5 @@ RUN npm install
 COPY . .
 
 RUN npm run build
-
-FROM node:14-alpine AS production
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install --only=prod
-
-COPY . .
-
-COPY --from=development /usr/src/app/dist ./dist
 
 CMD [ "npm", "run", "start:dev"]
