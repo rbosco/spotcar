@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from 'dotenv';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import DatabaseLogger from './databaseLogger';
 
+config();
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({

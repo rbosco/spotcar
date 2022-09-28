@@ -11,6 +11,7 @@ import { ParkModule } from './park/park.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath:['.env'],
       isGlobal: true,
     }),
     ConfigModule.forRoot({
